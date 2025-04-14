@@ -36,7 +36,6 @@
     },
     methods: {
       login() {
-        console.log('Login data:', this.user_info)
         axios.post('http://localhost:8000/api/login', this.user_info)
         .then(response => {
                   toast.success('Welcome back ' + this.user_info.username + '!')
