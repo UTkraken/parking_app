@@ -1,7 +1,7 @@
 <template>
   <div>
-    <modale v-bind:revele="revele" v-bind:toggleModale="toogleModale" v-bind:parking-id="selectedParkingId"></modale>
-    <div v-if="loading">Loading...</div>
+    <park-modale :revele="revele" :toggleModale="toogleModale" :parking-id="selectedParkingId" @modaleStatus="printStatus"></park-modale>
+    <div v-if="loading" class="loading">Loading...</div>
     <div v-else-if="error">Error: {{ error }}</div>
     <div v-else class="home-container">
       <h1>Available Parking</h1>
@@ -28,7 +28,7 @@
       }
     },
     components: {
-      'modale': ParkModal
+      'park-modale': ParkModal
     },
     methods: {
       toogleModale(parkingId) {
@@ -37,6 +37,9 @@
       },
       redirectReservation() {
         this.$router.push('/new-reservation')
+      },
+      printStatus(data) {
+        console.log('Modale Status: ' + data)
       }
     },
     setup() {
@@ -75,13 +78,15 @@
     font-family: 'Lato';
   }
 
-  .home-container {
+  .home-container, .loading {
     width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;  
+    font-family: 'Lato';
+    color:#7D7D7D;
   }
 
   .park-container {

@@ -1,9 +1,7 @@
 <template>
     <div class="modale-container" v-if="revele">
         <div class="exit" v-on:click="toggleModale">X</div>
-        <div v-if="loading">Loading...</div>
-        <div v-else-if="error">Error: {{ error }}</div>
-        <div v-else:"parkingData">
+        <div>
             <h2>{{ parkingData.name }}</h2>
             <hr>
             <p>Number of floors: {{ parkingData.floor_count }}</p>
@@ -29,6 +27,7 @@ export default {
         revele(newVal) {
             if (newVal) {
                 this.fetchParkingData(this.parkingId);
+                this.$emit('modaleStatus', newVal)
             }
         },
     },
